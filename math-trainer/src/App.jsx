@@ -5,17 +5,28 @@ import GamePage from './pages/GamePage/GamePage';
 import ResultsPage from './pages/ResultsPage/ResultsPage';
 
 function App() {
- 
-  const [currentPage, setCurrentPage] = useState('start'); // 'start', 'game', 'results'
+  const [gameState, setGameState] = useState('start'); 
+  const [gameResults, setGameResults] = useState({ finalScore: 0 });
+  const startGame = () => {
+    setGameState('game');
+  };
+  const endGame = (results) => {
+    setGameResults(results);
+    setGameState('results');
+  };
+  const restartGame = () => {
+    setGameState('start');
+    setGameResults({ finalScore: 0 });
+  };
 
   const renderPage = () => {
-    switch (currentPage) {
+    switch (gameState) {
       case 'game':
-        return <GamePage />;
+        return <GamePage onGameEnd={endGame} />;
       case 'results':
-        return <ResultsPage />;
+        return <ResultsPage results={gameResults} onRestart={restartGame} />;
       default:
-        return <StartPage />;
+        return <StartPage onStart={startGame} />;
     }
   };
 

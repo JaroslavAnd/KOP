@@ -1,13 +1,22 @@
-import { useState } from 'react';
+import { useGameLogic } from '../../hooks/useGameLogic';
 import Button from '../../components/Button/Button';
 import styles from './GamePage.module.css';
 
-const GamePage = () => {
+const GamePage = ({ onGameEnd }) => {
+  const {
+    timeLeft,
+    score,
+    currentProblem,
+    userAnswer,
+    setUserAnswer,
+    handleAnswerSubmit,
+  } = useGameLogic(onGameEnd);
 
-  const [currentProblem, setCurrentProblem] = useState('12 + 8 = ?');
-  const [userAnswer, setUserAnswer] = useState('');
-  const [timeLeft, setTimeLeft] = useState(10);
-  const [score, setScore] = useState(0);
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleAnswerSubmit();
+    }
+  };
 
   return (
     <div className={styles.gamePage}>
@@ -16,19 +25,23 @@ const GamePage = () => {
         <span>Рахунок: {score}</span>
       </div>
       
-      <div className={styles.problem}>
-        {currentProblem}
-      </div>
+      {currentProblem && (
+        <div className={styles.problem}>
+          {currentProblem.a} {currentProblem.operator} {currentProblem.b} = ?
+        </div>
+      )}
       
       <input
-        type="text"
+        type="number"
         className={styles.answerInput}
         value={userAnswer}
         onChange={(e) => setUserAnswer(e.target.value)}
+        onKeyPress={handleKeyPress}
         placeholder="Ваша відповідь"
+        autoFocus
       />
       
-      <Button onClick={() => alert('Відповідь прийнято!')}>
+      <Button onClick={handleAnswerSubmit}>
         Відповісти
       </Button>
     </div>
