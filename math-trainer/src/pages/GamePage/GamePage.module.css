@@ -1,0 +1,30 @@
+.gamePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--white-color);
+  border-radius: 8px;
+}
+
+.gameInfo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.problem {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.answerInput {
+  padding: 10px;
+  font-size: 18px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+  text-align: center;
+}
