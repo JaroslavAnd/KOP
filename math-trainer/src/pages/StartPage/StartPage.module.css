@@ -1,0 +1,10 @@
+.startPage {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: var(--white-color);
+  border-radius: 8px;
+}
+
+.settings {
+  margin: 20px 0;
+}

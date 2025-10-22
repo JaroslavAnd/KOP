@@ -1,0 +1,17 @@
+.resultsPage {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: var(--white-color);
+  border-radius: 8px;
+}
+
+.score {
+  font-size: 24px;
+  margin: 20px 0;
+  color: var(--primary-color);
+}
+
+.stats {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
