@@ -1,31 +1,20 @@
-import { useState } from 'react';
-import Layout from './components/Layout/Layout';
-import StartPage from './pages/StartPage/StartPage';
-import GamePage from './pages/GamePage/GamePage';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout/Layout.jsx';
+import StartPage from './pages/StartPage/StartPage.jsx';
+import GamePage from './pages/GamePage/GamePage.jsx';
+import ProfilePage from './pages/ProfilePage/profilePage.jsx';
 
 function App() {
-  const [gameState, setGameState] = useState('start'); 
-
-  const startGame = () => {
-    setGameState('game');
-  };
-  
-  const goToHome = () => {
-    setGameState('start');
-  };
-
-  const renderPage = () => {
-    switch (gameState) {
-      case 'game':
-        return <GamePage onGoToHome={goToHome} />;
-      default:
-        return <StartPage onStart={startGame} />;
-    }
-  };
 
   return (
     <Layout>
-      {renderPage()}
+      <Routes>
+        <Route path="/profile/:userId" element={<ProfilePage />} />
+        
+        <Route path="/game" element={<GamePage />} />
+        
+        <Route path="/" element={<StartPage />} />
+      </Routes>
     </Layout>
   );
 }

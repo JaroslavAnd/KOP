@@ -1,5 +1,5 @@
-import Header from '../Header/Header';
-import Container from '../Container/Container';
+import Header from '../Header/Header.jsx';
+import Container from '../Container/Container.jsx';
 import styles from './Layout.module.css';
 
 const Layout = ({ children }) => {
