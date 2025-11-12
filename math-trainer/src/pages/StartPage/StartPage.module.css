@@ -8,3 +8,35 @@
 .settings {
   margin: 20px 0;
 }
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 250px;
+}
+
+.formGroup label {
+  font-weight: bold;
+}
+
+.formGroup select,
+.formGroup input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.error {
+  color: var(--danger-color);
+  font-size: 14px;
+  margin: 0;
+}

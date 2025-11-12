@@ -28,3 +28,16 @@
   margin-bottom: 20px;
   text-align: center;
 }
+.modalActions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media (min-width: 600px) {
+  .modalActions {
+    flex-direction: row;
+  }
+}
