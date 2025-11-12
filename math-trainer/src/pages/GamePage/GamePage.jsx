@@ -1,28 +1,33 @@
 import { useGameLogic } from '../../hooks/useGameLogic.js';
 import Button from '../../components/Button/Button.jsx';
-import Modal from '../../components/Modal/Modal.jsx'; 
+import Modal from '../../components/Modal/Modal.jsx';
 import styles from './GamePage.module.css';
+import { useNavigate } from 'react-router-dom'; 
 
-const GamePage = ({ onGoToHome }) => {
+const GamePage = () => {
+  const navigate = useNavigate();
   const {
     timeLeft,
     score,
     currentProblem,
     userAnswer,
-    isGameOver, 
+    isGameOver,
     setUserAnswer,
     handleAnswerSubmit,
-    restartGame, 
+    restartGame,
   } = useGameLogic();
-
+  
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleAnswerSubmit();
     }
   };
+  const handleGoToHome = () => {
+    navigate('/'); 
+  };
 
   return (
-    <> 
+    <>
       <div className={styles.gamePage}>
         <div className={styles.gameInfo}>
           <span>Час: {timeLeft}</span>
@@ -57,8 +62,8 @@ const GamePage = ({ onGoToHome }) => {
           <Button onClick={restartGame}>
             Грати цей раунд заново
           </Button>
-          <Button onClick={onGoToHome}>
-            Наступний тур (інші налаштування)
+          <Button onClick={handleGoToHome}>
+            Наступний тур
           </Button>
         </div>
       </Modal>

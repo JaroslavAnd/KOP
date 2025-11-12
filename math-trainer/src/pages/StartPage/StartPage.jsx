@@ -1,29 +1,31 @@
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button/Button.jsx';
 import styles from './StartPage.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useSettings } from '../../context/SettingsContext';
+import { useSettings } from '../../context/SettingsContext.jsx';
+import { useNavigate } from 'react-router-dom'; 
 
 const schema = yup.object().shape({
   difficulty: yup.string().required(),
   gameTime: yup.number()
     .min(10, 'Мінімум 10 секунд')
     .max(60, 'Максимум 60 секунд')
-    .required(),
+    .required("Це поле обов'язкове"),
 });
 
-const StartPage = ({ onStart }) => {
+const StartPage = () => {
   const { settings, setSettings } = useSettings();
+  const navigate = useNavigate(); 
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: settings, 
+    defaultValues: settings,
   });
 
   const onSubmit = (data) => {
-    setSettings(data); 
-    onStart();         
+    setSettings(data);
+    navigate('/game'); 
   };
 
   return (

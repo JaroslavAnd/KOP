@@ -1,6 +1,30 @@
 .header {
   background-color: var(--white-color);
-  padding: 20px;
+  padding: 15px 30px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.navLink {
+  margin: 0 10px;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.navLink:hover {
+  text-decoration: underline;
 }

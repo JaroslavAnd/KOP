@@ -6,4 +6,9 @@
   --white-color: #fff;
   --danger-color: #d0021b;
   --success-color: #7ed321;
+  --primary-hover: #357abd;
+  --gradient-start: #6a11cb;
+  --gradient-end: #2575fc;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --font-main: 'Arial', sans-serif;
 }
