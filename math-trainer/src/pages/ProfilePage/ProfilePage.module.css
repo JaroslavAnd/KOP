@@ -5,12 +5,66 @@
   text-align: center;
 }
 
-.profile a {
+.profile h2 span {
+  color: var(--primary-color);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+}
+
+@media (min-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statBox {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.statBox h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.statBox p {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.table {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+.homeLink {
   color: var(--primary-color);
   text-decoration: none;
   font-weight: bold;
 }
 
-.profile a:hover {
+.homeLink:hover {
   text-decoration: underline;
 }

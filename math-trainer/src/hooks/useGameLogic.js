@@ -1,43 +1,90 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useSettings } from '../context/SettingsContext'; 
+import { useGameStore } from '../store/useGameStore';
 
 export const useGameLogic = () => {
-  const { settings } = useSettings(); 
+  const settings = useGameStore((state) => state.settings);
+  const addResult = useGameStore((state) => state.addResult);
+  const currentUser = useGameStore((state) => state.currentUser);
   
   const [timeLeft, setTimeLeft] = useState(settings.gameTime);
   const [score, setScore] = useState(0);
-  const [currentProblem, setCurrentProblem] = useState(null);
+ 
+  const [currentProblem, setCurrentProblem] = useState({ text: 'Завантаження...', answer: 0 }); 
   const [userAnswer, setUserAnswer] = useState('');
   const [isGameActive, setIsGameActive] = useState(true);
   const [isGameOver, setIsGameOver] = useState(false);
 
   const generateProblem = useCallback(() => {
-    const operators = ['+', '-', '*'];
-    let a, b, operator;
+    let a, b, operator, problemText, correctAnswer;
 
-    switch (settings.difficulty) {
-      case 'hard':
-        a = Math.floor(Math.random() * 41) + 10; 
-        b = Math.floor(Math.random() * 41) + 10;
-        operator = operators[Math.floor(Math.random() * operators.length)];
-        break;
-      case 'medium':
-        a = Math.floor(Math.random() * 20) + 1; 
-        b = Math.floor(Math.random() * 20) + 1;
-        operator = operators[Math.floor(Math.random() * operators.length)];
-        break;
-      default: 
-        a = Math.floor(Math.random() * 10) + 1; 
-        b = Math.floor(Math.random() * 10) + 1;
-        operator = '+';
+    const difficulty = settings.difficulty;
+
+    if (difficulty === 'easy') {
+     
+      operator = '+';
+      a = Math.floor(Math.random() * 10) + 1;
+      b = Math.floor(Math.random() * 10) + 1;
+      correctAnswer = a + b;
+      problemText = `${a} + ${b}`;
+
+    } else if (difficulty === 'medium') {
+    
+      const operators = ['+', '-', '*'];
+      operator = operators[Math.floor(Math.random() * operators.length)];
+
+      if (operator === '*') {
+       
+        a = Math.floor(Math.random() * 11) + 2; 
+        b = Math.floor(Math.random() * 11) + 2; 
+        correctAnswer = a * b;
+        problemText = `${a} × ${b}`; 
+      } else {
+       
+        a = Math.floor(Math.random() * 30) + 1;
+        b = Math.floor(Math.random() * 30) + 1;
+        if (operator === '-' && a < b) {
+          [a, b] = [b, a]; 
+        }
+        correctAnswer = (operator === '+') ? a + b : a - b;
+        problemText = `${a} ${operator} ${b}`;
+      }
+
+    } else { 
+  
+      const operators = ['+', '-', '*', '/'];
+      operator = operators[Math.floor(Math.random() * operators.length)];
+
+      if (operator === '/') {
+     
+        const result = Math.floor(Math.random() * 10) + 2; 
+        b = Math.floor(Math.random() * 10) + 2;          
+        a = result * b; 
+        correctAnswer = result;
+        problemText = `${a} ÷ ${b}`; 
+      } else if (operator === '*') {
+
+        a = Math.floor(Math.random() * 16) + 5; 
+        b = Math.floor(Math.random() * 16) + 5; 
+        correctAnswer = a * b;
+        problemText = `${a} × ${b}`;
+      } else {
+        a = Math.floor(Math.random() * 91) + 10; 
+        b = Math.floor(Math.random() * 91) + 10; 
+        if (operator === '-' && a < b) {
+          [a, b] = [b, a]; 
+        }
+        correctAnswer = (operator === '+') ? a + b : a - b;
+        problemText = `${a} ${operator} ${b}`;
+      }
     }
 
-    if (operator === '-' && a < b) {
-      [a, b] = [b, a];
-    }
-
-    setCurrentProblem({ a, b, operator });
+    setCurrentProblem({
+      text: problemText,
+      answer: correctAnswer,
+    });
+    
   }, [settings.difficulty]);
+
 
   useEffect(() => {
     generateProblem();
@@ -45,34 +92,31 @@ export const useGameLogic = () => {
 
   useEffect(() => {
     if (!isGameActive) return;
-
     if (timeLeft === 0) {
-      setIsGameActive(false);
-      setIsGameOver(true); 
+      setIsGameActive(false); 
+      setIsGameOver(true);    
+      addResult({
+        score: score,
+        difficulty: settings.difficulty,
+        gameTime: settings.gameTime,
+        userName: currentUser,
+        date: new Date().toISOString(),
+      });
       return;
     }
-
     const timerId = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - 1);
     }, 1000);
-
     return () => clearInterval(timerId);
-  }, [timeLeft, isGameActive]);
+  }, [timeLeft, isGameActive, score, settings, addResult, currentUser]);
 
   const handleAnswerSubmit = () => {
-    if (!userAnswer) return;
-    const { a, b, operator } = currentProblem;
-    let correctAnswer;
-    switch (operator) {
-      case '+': correctAnswer = a + b; break;
-      case '-': correctAnswer = a - b; break;
-      case '*': correctAnswer = a * b; break;
-      default: return;
-    }
+    if (!isGameActive || !userAnswer) return;
 
-    if (parseInt(userAnswer, 10) === correctAnswer) {
+    if (parseInt(userAnswer, 10) === currentProblem.answer) {
       setScore((prevScore) => prevScore + 10);
     }
+    
     setUserAnswer('');
     generateProblem();
   };
@@ -88,11 +132,12 @@ export const useGameLogic = () => {
   return {
     timeLeft,
     score,
-    currentProblem,
+    currentProblem, 
     userAnswer,
     isGameOver,
+    isGameActive, 
     setUserAnswer,
     handleAnswerSubmit,
-    restartGame, 
+    restartGame,
   };
 };
