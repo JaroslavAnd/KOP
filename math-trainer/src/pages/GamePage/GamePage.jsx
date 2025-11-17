@@ -2,16 +2,18 @@ import { useGameLogic } from '../../hooks/useGameLogic.js';
 import Button from '../../components/Button/Button.jsx';
 import Modal from '../../components/Modal/Modal.jsx';
 import styles from './GamePage.module.css';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const GamePage = () => {
   const navigate = useNavigate();
+  
   const {
     timeLeft,
     score,
-    currentProblem,
+    currentProblem, 
     userAnswer,
     isGameOver,
+    isGameActive, 
     setUserAnswer,
     handleAnswerSubmit,
     restartGame,
@@ -22,8 +24,9 @@ const GamePage = () => {
       handleAnswerSubmit();
     }
   };
+
   const handleGoToHome = () => {
-    navigate('/'); 
+    navigate('/');
   };
 
   return (
@@ -34,11 +37,9 @@ const GamePage = () => {
           <span>Рахунок: {score}</span>
         </div>
         
-        {currentProblem && (
-          <div className={styles.problem}>
-            {currentProblem.a} {currentProblem.operator} {currentProblem.b} = ?
-          </div>
-        )}
+        <div className={styles.problem}>
+          {currentProblem.text} = ?
+        </div>
         
         <input
           type="number"
@@ -48,9 +49,13 @@ const GamePage = () => {
           onKeyPress={handleKeyPress}
           placeholder="Ваша відповідь"
           autoFocus
+          disabled={!isGameActive} 
         />
         
-        <Button onClick={handleAnswerSubmit}>
+        <Button 
+          onClick={handleAnswerSubmit} 
+          disabled={!isGameActive} 
+        >
           Відповісти
         </Button>
       </div>

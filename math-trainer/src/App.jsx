@@ -1,18 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout/Layout.jsx';
-import StartPage from './pages/StartPage/StartPage.jsx';
-import GamePage from './pages/GamePage/GamePage.jsx';
-import ProfilePage from './pages/ProfilePage/profilePage.jsx';
+import Layout from './components/Layout/Layout';
+import StartPage from './pages/StartPage/StartPage';
+import GamePage from './pages/GamePage/GamePage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
+import ResultsPage from './pages/ResultsPage/ResultsPage';
 
 function App() {
-
   return (
     <Layout>
       <Routes>
-        <Route path="/profile/:userId" element={<ProfilePage />} />
-        
+        <Route path="/profile/:userName" element={<ProfilePage />} />
         <Route path="/game" element={<GamePage />} />
-        
+        <Route path="/results" element={<ResultsPage />} />
         <Route path="/" element={<StartPage />} />
       </Routes>
     </Layout>
