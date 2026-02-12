@@ -79,5 +79,5 @@ npx license-checker --summary
 
 ## 📄 Ліцензія та приватність
 
-**Ліцензія:** MIT (див. файл `LICENSE`).  
-**Конфіденційність:** Дані зберігаються локально (див. [Privacy_Policy](https://github.com/JaroslavAnd/KOP/blob/main/PRIVACY_POLICY.md)).
+**Ліцензія:** MIT (див. файл [LICENCE](https://github.com/JaroslavAnd/KOP/blob/main/math-trainer/LICENSE)).  
+**Конфіденційність:** Дані зберігаються локально (див. [PRIVACY_POLICY](https://github.com/JaroslavAnd/KOP/blob/main/PRIVACY_POLICY.md)).
