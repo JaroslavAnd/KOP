@@ -42,8 +42,8 @@
 
 ### Клонування репозиторію:  
 ```bash
-git clone https://github.com/ваш-нікнейм/math-trainer.git
-cd math-trainer
+git clone https://github.com/JaroslavAnd/KOP.git
+cd KOP
 npm install
 ```
 
