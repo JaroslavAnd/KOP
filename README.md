@@ -80,5 +80,4 @@ npx license-checker --summary
 ## 📄 Ліцензія та приватність
 
 **Ліцензія:** MIT (див. файл `LICENSE`).  
-**Конфіденційність:** Дані зберігаються локально (див. `[Privacy_Policy]([https://example.com](https://github.com/JaroslavAnd/KOP/blob/main/PRIVACY_POLICY.md))
-`).
+**Конфіденційність:** Дані зберігаються локально (див. [Privacy_Policy](https://github.com/JaroslavAnd/KOP/blob/main/PRIVACY_POLICY.md)).
