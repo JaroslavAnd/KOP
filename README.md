@@ -81,5 +81,5 @@ npx license-checker --summary
 
 ##  Ліцензія та приватність
 
-**Ліцензія:** MIT (див. файл [LICENCE](/LICENCE)).  
+**Ліцензія:** MIT (див. файл [LICENCE](./LICENCE)).  
 **Конфіденційність:** Дані зберігаються локально (див. [PRIVACY_POLICY](./PRIVACY_POLICY.md)).
